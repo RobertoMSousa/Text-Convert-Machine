@@ -10,6 +10,7 @@ angular.module('AppPlatform', [
 	'ngResource',
 	'ui.router',
 	'ngSanitize',
+	'ui.bootstrap',
 	// views
 	'AppPlatform.views.home'
 	// services
