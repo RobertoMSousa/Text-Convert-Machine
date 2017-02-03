@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"sourceMap": true,
+		"types": [
+			"node",
+			"angular",
+			"angular-ui-router"
+		]
+	},
+	"exclude": [
+		"node_modules",
+		"typings/browser",
+		"typings/browser.d.ts"
+	],
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"atom": {
+		"rewriteTsconfig": false
+	}
+}
