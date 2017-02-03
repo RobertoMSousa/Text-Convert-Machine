@@ -1,3 +1,6 @@
 /node_modules/
 /public/
 /bower_components/
+/server/definitions/
+/server/lib/
+/server/maps/
