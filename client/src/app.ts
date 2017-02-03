@@ -1,6 +1,3 @@
-///<reference path='../typings/index.d.ts' />
-//
-
 
 
 interface IAppRootScope extends angular.IRootScopeService {
@@ -28,7 +25,6 @@ angular.module('AppPlatform', [
 			$state.go('home'); /// Fallback
 		});
 
-		window.ja.send('Global', 'Load');
 	}])
 	.config(['$urlRouterProvider', function($urlRouterProvider) {
 		$urlRouterProvider.when('', 'home');
