@@ -1,5 +1,5 @@
 
-angular.module('App.views.home', [
+angular.module('AppPlatform.views.home', [
 	'ui.router'
 ])
 	.config(['$stateProvider', function($stateProvider: angular.ui.IStateProvider) {

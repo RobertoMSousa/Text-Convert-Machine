@@ -37,13 +37,3 @@ angular.module('AppPlatform', [
 		});
 
 	}]);
-
-
-/**
- * Allow orientation changes in Cordova. This function
- * has to live in the global window!
- */
-/*function shouldRotateToOrientation(degrees) {
-	return true;
-}
-*/
