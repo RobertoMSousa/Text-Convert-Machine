@@ -12,9 +12,10 @@ angular.module('AppPlatform', [
 	'ngSanitize',
 	'ui.bootstrap',
 	// views
-	'AppPlatform.views.home'
+	'AppPlatform.views.home',
 	// services
 	// widgets
+	'AppPlatform.widgets.loadingAnimation',
 ])
 	.run(['$rootScope', '$q', '$state', '$stateParams', '$window', '$location', '$timeout', function($rootScope: IAppRootScope, $q, $state, $stateParams, $window, $location, $timeout) {
 
