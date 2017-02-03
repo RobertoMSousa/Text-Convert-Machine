@@ -7,6 +7,8 @@ import './app-controller';
 //views
 import './views/home/_home';
 import './views/home/home-controller';
+import './views/create/_create';
+import './views/create/create-controller';
 //widgets
 import './widgets/loading-animation/loading-animation';
 import './widgets/check-animation/check-animation';

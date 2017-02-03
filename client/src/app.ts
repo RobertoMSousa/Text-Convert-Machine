@@ -13,6 +13,7 @@ angular.module('AppPlatform', [
 	'ui.bootstrap',
 	// views
 	'AppPlatform.views.home',
+	'AppPlatform.views.create',
 	// services
 	// widgets
 	'AppPlatform.widgets.loadingAnimation',
