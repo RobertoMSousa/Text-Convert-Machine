@@ -148,10 +148,9 @@ gulp.task('compile:stylus', function(finished) {
 	var exit = finished;
 	/// Note: Correct async running
 	gulp.src([
-		'client/style/normalize.css',
+		'client/style/colors.styl',
 		'client/style/base.styl',
 		'client/style/main.styl',
-		'client/style/colors.styl',
 		'client/src/**/*.styl'
 		])
 	.pipe(concat('all.styl'))
