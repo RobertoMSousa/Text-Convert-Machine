@@ -2,8 +2,30 @@
 div.home-main-container
 	div.row.convertion-home-header
 		div.col-sm-6.convertion-home-header-left
-			h1.convertion-home-header-title Convertions
+			h1.convertion-home-header-title.center Convertions
 		div.col-sm-6.convertion-home-header-right
-		//- button.btn.btn-primary(id="btn-append-to-body" type="button")
+			button.btn.btn-primary.center(type="button")
+				span + New Convertion
 	div.row.convertion-home-content-title
+		div.col-sm-4.home-menu-left
+			p.center Name
+		div.col-sm-6.home-menu-center
+			div.col-xs-6.home-xs-menu
+				p.center Created at
+			div.col-xs-3.home-xs-menu
+				p.center Type
+			div.col-xs-3.home-xs-menu
+				p.center Status
+		div.col-sm-2.home-menu-right
 	div.row.convertion-home-content-list
+		div.display-convertion-row(ng-repeat='file in ctrl.listFiles')
+			div.col-sm-4
+				p.center(ng-bind='file.name')
+			div.col-sm-6
+				div.col-xs-6.home-convertion-display-date
+					p.center(ng-bind='file.created')
+				div.col-xs-3
+					p.center(ng-bind='file.type')
+				div.col-xs-3
+					loading-animation
+			div.col-sm-2
