@@ -8,4 +8,5 @@ import './app-controller';
 import './views/home/_home';
 import './views/home/home-controller';
 //widgets
-import './widgets/loading-animation/loading-animation'
+import './widgets/loading-animation/loading-animation';
+import './widgets/check-animation/check-animation';

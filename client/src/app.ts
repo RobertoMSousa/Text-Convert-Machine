@@ -16,6 +16,7 @@ angular.module('AppPlatform', [
 	// services
 	// widgets
 	'AppPlatform.widgets.loadingAnimation',
+	'AppPlatform.widgets.checkAnimation'
 ])
 	.run(['$rootScope', '$q', '$state', '$stateParams', '$window', '$location', '$timeout', function($rootScope: IAppRootScope, $q, $state, $stateParams, $window, $location, $timeout) {
 
