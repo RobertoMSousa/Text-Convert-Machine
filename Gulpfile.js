@@ -10,16 +10,13 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	install = require('gulp-install'),
 	bower = require('gulp-bower'),
-	typings = require('gulp-typings'),
 	del = require('del'),
 	vinylPaths = require('vinyl-paths'),
-	mocha = require('gulp-mocha'),
 	notifier = require('node-notifier'),
 	tslint = require('gulp-tslint'),
 	gutil = require('gulp-util'),
 	path = require('path'),
 	istanbul = require('gulp-istanbul'),
-	Karma = require('karma'),
 	TypeScript = require('typescript'),
 	uglify = require('gulp-uglify'),
 	print = require('gulp-print'),
@@ -259,21 +256,13 @@ gulp.task('bower:install', function() {
 	return bower().pipe(gulp.dest('public/components'));
 });
 
-gulp.task('install', ['bower:install','typings'], function() {
+gulp.task('install', ['bower:install'], function() {
 	gulp.src(['./package.json'])
 	.pipe(install());
 });
 
-gulp.task('typings', function(cb) {
-	/// installs at path.dirname(file.path) so we are fine!
-	return gulp.src([
-		'server/typings.json',
-		'client/typings.json'
-	]).pipe(typings());
-});
 
-
-gulp.task('update', ['typings'], function() {
+gulp.task('update', function() {
 	gulp.src(['./package.json']).pipe(install());
 	bower({cmd:'update'});
 });
@@ -288,6 +277,7 @@ gulp.task('distclean', function() {
 		'./server/definitions',
 		'./server/lib',
 		'./server/typings',
+		'./bower_components',
 		'./public'
 	], {read:false})
 	.pipe(vinylPaths(del))
