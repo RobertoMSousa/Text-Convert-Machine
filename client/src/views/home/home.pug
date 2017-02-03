@@ -2,7 +2,7 @@
 div.home-main-container
 	div.row.convertion-home-header
 		div.col-sm-6.convertion-home-header-left
-			h1.convertion-home-header-title.center Convertions
+			//- h1.convertion-home-header-title.center Convertions
 		div.col-sm-6.convertion-home-header-right
 			button.btn.btn-primary.center(type="button")
 				span + New Convertion
@@ -27,5 +27,6 @@ div.home-main-container
 				div.col-xs-3
 					p.center(ng-bind='file.type')
 				div.col-xs-3
-					loading-animation
+					loading-animation.center(ng-if='!file.processed')
+					check-animation.center(ng-if='file.processed')
 			div.col-sm-2
