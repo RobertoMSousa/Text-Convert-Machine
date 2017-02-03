@@ -30,9 +30,6 @@ div.home-main-container
 					loading-animation.center(ng-if='!file.processed')
 					check-animation.center(ng-if='file.processed')
 			div.col-sm-2
-				a.btn.btn-primary.btn-success.btn-disable.center(href='#' ng-if='file.processed')
+				div.btn.btn-primary.btn-success.center(ng-click='' ng-class="{'home-disable-download-btn' : file.processed == false}"))
 					span.glyphicon.glyphicon-download-alt
-					|  Download
-				a.btn.btn-danger.center(href='#' ng-if='!file.processed')
-					span.glyphicon.glyphicon-exclamation-sign
 					|  Download
