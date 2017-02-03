@@ -97,6 +97,7 @@ function tslintReporter(output, file, options) {
 }
 
 var gotError = false;
+
 function plumberErr() {
 	return plumber({
 		errorHandler: function() {
