@@ -1,0 +1,10 @@
+{
+	"directory": "public/components",
+	"analytics": false,
+	"timeout": 240000,
+	"registry": "https://bower.herokuapp.com",
+	"color": false,
+	"interactive": false,
+	"strict-ssl": false,
+	"allow_root": true
+}
