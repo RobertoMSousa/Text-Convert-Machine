@@ -1,6 +1,7 @@
 
+
 interface IHomeControllerScope extends ng.IScope {
-	ctrl: AppHomeController;
+	ctrl: AppHomeViewController;
 }
 
 class AppHomeViewController {
