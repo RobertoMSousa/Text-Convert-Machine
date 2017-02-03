@@ -13,6 +13,7 @@
     "async": "1.5.2",
     "bowser": "1.0.0",
     "Caret.js": "caret.js#~0.3.1",
-    "core.js": "^2.4.1"
+    "core.js": "^2.4.1",
+    "angular-bootstrap": "^2.5.0"
   }
 }
