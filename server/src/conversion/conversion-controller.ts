@@ -1,9 +1,10 @@
 
 import express = require('express');
 import mongosome = require('../mongosome');
-import Sample = require('./sample');
+import Sample = require('./conversion');
 
 
-export function sampleFunc(req: express.Request, res: express.Response): void {
-
+export function conversionFunc(req: express.Request, res: express.Response): void {
+	console.log('req.body-->', req.body);//roberto
+	res.sendStatus(200);
 }
