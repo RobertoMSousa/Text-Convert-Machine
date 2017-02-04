@@ -5,20 +5,21 @@ interface ICreateControllerScope extends ng.IScope {
 
 class AppCreateViewController {
 
+	private quill = new Quill('#editor-container', {
+		modules: {
+			toolbar: [
+				[{ header: [1, 2, false] }],
+				['bold', 'italic', 'underline'],
+				['image', 'code-block']
+			]
+		},
+		placeholder: 'Compose an epic...',
+		theme: 'snow'
+	});
+
 	constructor(
 		private $scope: ICreateControllerScope,
 		private $state: angular.ui.IStateService) {
-		var quill = new Quill('#editor-container', {
-			modules: {
-				toolbar: [
-					[{ header: [1, 2, false] }],
-					['bold', 'italic', 'underline'],
-					['image', 'code-block']
-				]
-			},
-			placeholder: 'Compose an epic...',
-			theme: 'snow'  // or 'bubble'
-		});
 	}
 
 	private convertFile() {
