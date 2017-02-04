@@ -20,11 +20,11 @@ function main(callback) {
 		console.log('Running on: ' + myIP);
 	}
 
-	console.log("Will run set-up scripts...");
 	/* Done with all, launch actual server */
 	var server = http.createServer(app.app);
 	/// Start normally
 	server.listen(8000, myIP);
+	console.log("server running");
 };
 
 /// -----------

@@ -3,7 +3,7 @@ require('source-map-support').install();
 import express = require('express');
 import path = require('path');
 import bodyParser = require('body-parser');
-import authRoutes = require('./sample/sample-routes');
+import converionRoutes = require('./conversion/conversion-routes');
 
 var publicDir = path.join(__dirname, '/../../public/');
 
@@ -30,3 +30,5 @@ app.use('/doc/',
 app.get('/', function(req, res) {
 	res.sendFile(path.join(publicDir, 'base.html'));
 });
+
+app.use('/api/conversion', converionRoutes.Routes.conversion());
