@@ -48,7 +48,6 @@ class AppHomeViewController {
 	}
 
 	private goToCreate() {
-		console.log('goToCreate');//roberto
 		this.$state.go('create');
 	}
 
