@@ -23,10 +23,13 @@ class AppCreateViewController {
 	}
 
 	private convertFile() {
-		this.$state.go('create');
+		// get the delta content of a file and send it to the server
+		console.log('delta-->', this.quill.getContents());//roberto
+		// this.$state.go('home');
 	}
 
 	private cancelConvertion() {
+		// cancel and return to the home page
 		this.$state.go('home');
 	}
 
