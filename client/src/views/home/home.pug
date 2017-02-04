@@ -1,12 +1,12 @@
 
 div.home-main-container
-	div.row.convertion-home-header
-		div.col-sm-6.convertion-home-header-left
-			h1.convertion-home-header-title.center Convertions
-		div.col-sm-6.convertion-home-header-right
+	div.row.conversion-home-header
+		div.col-sm-6.conversion-home-header-left
+			h1.conversion-home-header-title.center Convertions
+		div.col-sm-6.conversion-home-header-right
 			button.btn.btn-primary.center(type="button" ng-click='ctrl.goToCreate()')
 				span + New Convertion
-	div.row.convertion-home-content-title
+	div.row.conversion-home-content-title
 		div.col-sm-4.home-menu-left
 			p.center Name
 		div.col-sm-6.home-menu-center
@@ -17,12 +17,12 @@ div.home-main-container
 			div.col-xs-3.home-xs-menu
 				p.center Status
 		div.col-sm-2.home-menu-right
-	div.row.convertion-home-content-list
-		div.display-convertion-row(ng-repeat='file in ctrl.listFiles')
+	div.row.conversion-home-content-list
+		div.display-conversion-row(ng-repeat='file in ctrl.listFiles')
 			div.col-sm-4
 				p.center(ng-bind='file.name')
 			div.col-sm-6
-				div.col-xs-6.home-convertion-display-date
+				div.col-xs-6.home-conversion-display-date
 					p.center(ng-bind='file.created')
 				div.col-xs-3
 					p.center(ng-bind='file.type')
