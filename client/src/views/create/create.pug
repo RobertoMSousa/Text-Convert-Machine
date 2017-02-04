@@ -6,21 +6,19 @@ div.create-main-container
 		#editor-container
 	div.row.create-footer
 		div.col-sm-6
-			.dropdown
-				button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
-					| Dropdown
-					span.caret
-				ul.dropdown-menu(aria-labelledby='dropdownMenu1')
-					li
-						a(href='#') Generate HTML
-					li
-						a(href='#') Generate PDF
-					li
-						a(href='#') Something else here
-					li.divider(role='separator')
-					li
-						a(href='#') Separated link
-
+			div.drop-down-main-container
+				p.create-converion-type Convert to:
+				.btn-group(uib-dropdown='', is-open='status.isopen')
+					button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='disabled')
+						| Button dropdown 
+						span.caret
+					ul.dropdown-menu(uib-dropdown-menu='', role='menu', aria-labelledby='single-button')
+						li(role='menuitem')
+							div.create-drop-down-select
+								span Action
+						li(role='menuitem')
+							div.create-drop-down-select
+								span Another action
 		div.col-sm-6
 			div.create-final-button-container.center
 				div.btn.btn-lg.btn-success(ng-click='')
