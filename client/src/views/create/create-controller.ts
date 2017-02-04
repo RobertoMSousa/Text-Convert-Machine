@@ -21,6 +21,14 @@ class AppCreateViewController {
 		});
 	}
 
+	private convertFile() {
+		this.$state.go('create');
+	}
+
+	private cancelConvertion() {
+		this.$state.go('home');
+	}
+
 }
 
 angular.module('AppPlatform.views.create')
