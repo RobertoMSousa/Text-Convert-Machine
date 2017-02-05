@@ -4,6 +4,7 @@ import './app-helper';
 import './app';
 import './app-controller';
 //services
+import './services/conversion/conversion-resource';
 //views
 import './views/home/_home';
 import './views/home/home-controller';

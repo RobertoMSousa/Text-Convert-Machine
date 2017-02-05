@@ -15,6 +15,7 @@ angular.module('AppPlatform', [
 	'AppPlatform.views.home',
 	'AppPlatform.views.create',
 	// services
+	'AppPlatform.services.conversion',
 	// widgets
 	'AppPlatform.widgets.loadingAnimation',
 	'AppPlatform.widgets.checkAnimation'
