@@ -19,13 +19,18 @@ class AppCreateViewController {
 
 	constructor(
 		private $scope: ICreateControllerScope,
-		private $state: angular.ui.IStateService) {
+		private $state: angular.ui.IStateService,
+		private ConversionResource: IConversionResource) {
 	}
 
 	private convertFile() {
-		// get the delta content of a file and send it to the server
-		console.log('delta-->', this.quill.getContents());//roberto
-		// this.$state.go('home');
+		this.ConversionResource.convert(this.quill.getContents(), () => {
+			this.$state.go('home');
+			return;
+		},
+			(error) => {
+				return;
+			});
 	}
 
 	private cancelConvertion() {
@@ -39,5 +44,6 @@ angular.module('AppPlatform.views.create')
 	.controller('AppCreateViewController', [
 		'$scope',
 		'$state',
+		'ConversionResource',
 		AController(AppCreateViewController)
 	]);
