@@ -23,7 +23,7 @@ class AppCreateViewController {
 		theme: 'snow'
 	});
 
-	private title: string = '';
+	private title: string = 'untitled';
 
 	private dropSelect: string = 'HTML';
 

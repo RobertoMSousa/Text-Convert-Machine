@@ -1,7 +1,10 @@
 
 div.create-main-container
 	div.row.create-title
-		h1 New Convertion
+		div.col-sm-6
+			h1 New Convertion title:
+		div.col-sm-6
+			input.create-input-text-title.center(type="text" name="input" ng-model="ctrl.title")
 	div.row.create-quill-main-container
 		#editor-container
 	div.row.create-footer
