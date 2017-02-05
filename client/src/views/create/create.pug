@@ -10,15 +10,12 @@ div.create-main-container
 				p.create-converion-type Convert to:
 				.btn-group(uib-dropdown='', is-open='status.isopen')
 					button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='disabled')
-						| Button dropdown 
+						| {{ctrl.dropSelect}} 
 						span.caret
-					ul.dropdown-menu(uib-dropdown-menu='', role='menu', aria-labelledby='single-button')
-						li(role='menuitem')
+					ul.dropdown-menu(uib-dropdown-menu='' role='menu' aria-labelledby='single-button')
+						li(role='menuitem' ng-click='ctrl.setDropValue(type)' ng-repeat='type in ctrl.convListTypes')
 							div.create-drop-down-select
-								span Action
-						li(role='menuitem')
-							div.create-drop-down-select
-								span Another action
+								span(ng-bind='type')
 		div.col-sm-6
 			div.create-final-button-container.center
 				div.btn.btn-lg.btn-success(ng-click='ctrl.convertFile()')
