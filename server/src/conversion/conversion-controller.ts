@@ -33,6 +33,11 @@ function convertToHTML(doc: Conversion.IConversionSetDocument): void {
 		//once stream open write the content on the file
 		stream.once('open', () => {
 			stream.write(output);
+			//update file status on the db
+			const update: Object = {
+				'$set': { status: 'complete' }
+			};
+			Conversion.collection.findOneAndUpdate({ _id: doc._id }, update, {}, (err: Error, result: any) => { });
 		});
 		return;
 	});
@@ -56,7 +61,11 @@ function convertToPDF(doc: Conversion.IConversionSetDocument): void {
 			if (err) {
 				return console.log(err);
 			}
-			console.log(res); // file name
+			//update the file status on the DB
+			const update: Object = {
+				'$set': { status: 'complete' }
+			};
+			Conversion.collection.findOneAndUpdate({ _id: doc._id }, update, {}, (err: Error, result: any) => { });
 		});
 		return;
 	});
@@ -72,6 +81,7 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		title: req.body.title,
 		delta: req.body.delta,
 		created: new Date(Date.now()),
+		status: 'progress'
 		version: 1 // since is the creation is the version one
 	};
 

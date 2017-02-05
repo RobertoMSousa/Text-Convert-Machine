@@ -10,7 +10,7 @@ export interface IConversionSetDocument extends mongosome.IDocument {
 	type: string;
 	version: number;
 	created: Date;
-	// status: string;
+	status: string;
 }
 
 
