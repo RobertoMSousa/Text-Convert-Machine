@@ -93,13 +93,13 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		if (document.type === 'HTML') {
 			setTimeout(function() {
 				convertToHTML(document);
-			}, 1000);
+			}, 10000);
 		}
 		else {
 			if (document.type === 'PDF') {
 				setTimeout(function() {
 					convertToPDF(document);
-				}, 10000);
+				}, 100000);
 			}
 		}
 		res.sendStatus(200);
