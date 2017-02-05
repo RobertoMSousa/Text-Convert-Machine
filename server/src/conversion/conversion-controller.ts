@@ -6,6 +6,7 @@ import Conversion = require('./conversion');
 import render = require('render-quill');
 import path = require('path');
 import fs = require('fs');
+import pdf = require('html-pdf');
 
 
 
@@ -40,6 +41,31 @@ function convertToHTML(doc: Conversion.IConversionSetDocument, callback: (err: E
 }
 
 
+//function that convert the rich text to a pdf file
+function convertToPDF(doc: Conversion.IConversionSetDocument, callback: (err: Error) => void): void {
+	//convert the quill delta to html
+	render(doc.delta, (err, output) => {
+		// create and store the html file on the public folder
+
+		//set the upload dir as /public/uploads
+		const uploadDir = path.join(__dirname, '../../../public', './uploads');
+		const targetPath = path.join(uploadDir, doc._id.toString() + '.pdf');
+		//if the folder still don't exist create it
+		if (!fs.existsSync(uploadDir)) {
+			fs.mkdirSync(uploadDir);
+		}
+		pdf.create(output, { format: 'Letter' }).toFile(targetPath, function(err, res) {
+			if (err) {
+				return console.log(err);
+			}
+			console.log(res); // { filename: '/app/businesscard.pdf' }
+		});
+		callback(null);
+		return;
+	});
+}
+
+
 // function responsible to create and store the document that will be converted
 export function conversionFunc(req: express.Request, res: express.Response): void {
 	// build the document and store on the DB
@@ -66,6 +92,11 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		}
 		else {
 			if (document.type === 'PDF') {
+				convertToPDF(document, (err) => {
+					if (err) {
+						return;
+					}
+				});
 			}
 		}
 		res.sendStatus(200);
