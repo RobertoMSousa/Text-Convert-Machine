@@ -11,7 +11,7 @@ import pdf = require('html-pdf');
 
 
 //function that convert the rich text to a html file
-function convertToHTML(doc: Conversion.IConversionSetDocument, callback: (err: Error) => void): void {
+function convertToHTML(doc: Conversion.IConversionSetDocument): void {
 	//convert the quill delta to html
 	render(doc.delta, (err, output) => {
 		// create and store the html file on the public folder
@@ -34,15 +34,13 @@ function convertToHTML(doc: Conversion.IConversionSetDocument, callback: (err: E
 		stream.once('open', () => {
 			stream.write(output);
 		});
-
-		callback(null);
 		return;
 	});
 }
 
 
 //function that convert the rich text to a pdf file
-function convertToPDF(doc: Conversion.IConversionSetDocument, callback: (err: Error) => void): void {
+function convertToPDF(doc: Conversion.IConversionSetDocument): void {
 	//convert the quill delta to html
 	render(doc.delta, (err, output) => {
 		// create and store the html file on the public folder
@@ -58,9 +56,8 @@ function convertToPDF(doc: Conversion.IConversionSetDocument, callback: (err: Er
 			if (err) {
 				return console.log(err);
 			}
-			console.log(res); // { filename: '/app/businesscard.pdf' }
+			console.log(res); // file name
 		});
-		callback(null);
 		return;
 	});
 }
@@ -84,19 +81,15 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		}
 		// add the file to the store convertion queue
 		if (document.type === 'HTML') {
-			convertToHTML(document, (err) => {
-				if (err) {
-					return;
-				}
-			});
+			setTimeout(function() {
+				convertToHTML(document);
+			}, 1000);
 		}
 		else {
 			if (document.type === 'PDF') {
-				convertToPDF(document, (err) => {
-					if (err) {
-						return;
-					}
-				});
+				setTimeout(function() {
+					convertToPDF(document);
+				}, 10000);
 			}
 		}
 		res.sendStatus(200);
