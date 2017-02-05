@@ -10,7 +10,9 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 
 	var document: Conversion.IConversionSetDocument = {
 		documentId: new mongosome.ObjectID(),
-		delta: req.body
+		type: req.body.type,
+		title: req.body.title,
+		delta: req.body.delta
 	};
 
 	Conversion.collection.insert(document, (error, result: mongosome.IInsertResult<Conversion.IConversionSetDocument>) => {

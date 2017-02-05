@@ -1,4 +1,10 @@
 
+interface IDocumentCreate {
+	type: string;
+	title: string;
+	delta: any;
+}
+
 interface ICreateControllerScope extends ng.IScope {
 	ctrl: AppCreateViewController;
 }
@@ -17,6 +23,8 @@ class AppCreateViewController {
 		theme: 'snow'
 	});
 
+	private title: string = '';
+
 	private dropSelect: string = 'HTML';
 
 	private convListTypes: Array<string> = ['HTML', 'PDF']
@@ -32,7 +40,12 @@ class AppCreateViewController {
 	}
 
 	private convertFile() {
-		this.ConversionResource.convert(this.quill.getContents(), () => {
+		const localDoc: IDocumentCreate = {
+			delta: this.quill.getContents(),
+			title: 'sample',
+			type: this.dropSelect
+		};
+		this.ConversionResource.convert(localDoc, () => {
 			this.$state.go('home');
 			return;
 		},

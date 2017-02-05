@@ -6,6 +6,8 @@ import db = require('../main-db');
 export interface IConversionSetDocument extends mongosome.IDocument {
 	documentId: mongosome.ObjectID;
 	delta: any;
+	title: string;
+	type: string;
 	// created: Date;
 	// status: string;
 }
