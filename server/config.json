@@ -1,0 +1,15 @@
+{
+"__comment": "Note: create a file named 'config.local.json' for local customizations!",
+	"server": {
+		"ip": ""
+	},
+	"db": {
+		"host": "mongodb://localhost/textConvertMachine"
+	},
+	"MediaHandlerLocal": {
+		"uploadDirectory": "./uploads"
+	},
+	"media": {
+		"handler": "local"
+	}
+}
