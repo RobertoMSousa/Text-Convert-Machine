@@ -17,12 +17,16 @@ class AppCreateViewController {
 		theme: 'snow'
 	});
 
+	private dropSelect: string = 'HTML';
 	constructor(
 		private $scope: ICreateControllerScope,
 		private $state: angular.ui.IStateService,
 		private ConversionResource: IConversionResource) {
 	}
 
+	private setDropValue(value: string) {
+		this.dropSelect = value;
+	}
 	private convertFile() {
 		this.ConversionResource.convert(this.quill.getContents(), () => {
 			this.$state.go('home');
