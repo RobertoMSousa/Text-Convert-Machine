@@ -31,4 +31,6 @@ app.get('/', function(req, res) {
 	res.sendFile(path.join(publicDir, 'base.html'));
 });
 
+app.use(bodyParser.json());
+
 app.use('/api/conversion', converionRoutes.Routes.conversion());
