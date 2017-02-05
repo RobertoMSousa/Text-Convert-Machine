@@ -40,16 +40,22 @@ class AppCreateViewController {
 	}
 
 	private convertFile() {
+
+		//build the file with the data that will be send to the server
 		const localDoc: IDocumentCreate = {
 			delta: this.quill.getContents(),
 			title: this.title,
 			type: this.dropSelect
 		};
+
+		// call the service that communicate with the api
 		this.ConversionResource.convert(localDoc, () => {
 			this.$state.go('home');
 			return;
 		},
 			(error) => {
+				console.error('err:', error);
+				//show an alert box informing about the error
 				return;
 			});
 	}
