@@ -8,7 +8,8 @@ export interface IConversionSetDocument extends mongosome.IDocument {
 	delta: any;
 	title: string;
 	type: string;
-	// created: Date;
+	version: number;
+	created: Date;
 	// status: string;
 }
 

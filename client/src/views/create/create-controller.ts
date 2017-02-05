@@ -42,7 +42,7 @@ class AppCreateViewController {
 	private convertFile() {
 		const localDoc: IDocumentCreate = {
 			delta: this.quill.getContents(),
-			title: 'sample',
+			title: this.title,
 			type: this.dropSelect
 		};
 		this.ConversionResource.convert(localDoc, () => {
