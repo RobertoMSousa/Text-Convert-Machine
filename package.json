@@ -33,6 +33,7 @@
     "gulp-tslint": "^7.1.0",
     "gulp-typescript": "^3.1.4",
     "gulp-uglify": "^2.0.1",
+    "html-pdf": "^2.1.0",
     "merge2": "^1.0.3",
     "mongodb": "^2.2.22",
     "mongoskin": "^2.1.0",
