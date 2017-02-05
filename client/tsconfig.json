@@ -6,7 +6,8 @@
 			"node",
 			"angular",
 			"angular-ui-router",
-			"quill"
+			"quill",
+			"angular-resource"
 		]
 	},
 	"exclude": [
