@@ -18,6 +18,9 @@ class AppCreateViewController {
 	});
 
 	private dropSelect: string = 'HTML';
+
+	private convListTypes: Array<string> = ['HTML', 'PDF']
+
 	constructor(
 		private $scope: ICreateControllerScope,
 		private $state: angular.ui.IStateService,
@@ -27,6 +30,7 @@ class AppCreateViewController {
 	private setDropValue(value: string) {
 		this.dropSelect = value;
 	}
+
 	private convertFile() {
 		this.ConversionResource.convert(this.quill.getContents(), () => {
 			this.$state.go('home');
