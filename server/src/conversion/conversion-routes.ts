@@ -8,7 +8,8 @@ export module Routes {
 		var router = express.Router();
 
 		router.route('/')
-			.put(ConversionController.conversionFunc);
+			.put(ConversionController.conversionFunc)
+			.get(ConversionController.getFiles);
 
 		return router;
 	}

@@ -81,7 +81,7 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		title: req.body.title,
 		delta: req.body.delta,
 		created: new Date(Date.now()),
-		status: 'progress'
+		status: 'progress',
 		version: 1 // since is the creation is the version one
 	};
 
@@ -103,5 +103,18 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 			}
 		}
 		res.sendStatus(200);
+	});
+}
+
+
+// get the list of files that are stored omn the DB
+export function getFiles(req: express.Request, res: express.Response): void {
+	Conversion.collection.find({}).toArray((err: Error, files: Array<Conversion.IConversionSetDocument>) => {
+		if (err) {
+			return apiError.DatabaseError.sendError(res, err);
+		}
+		console.log('files-->', files);//roberto
+		res.json({ files: files }); //create object on the fly if does not exists
+		return;
 	});
 }
