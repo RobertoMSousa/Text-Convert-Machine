@@ -17,7 +17,7 @@ function convertToHTML(doc: Conversion.IConversionSetDocument): void {
 		// create and store the html file on the public folder
 
 		//set the upload dir as /public/uploads
-		const uploadDir = path.join(__dirname, '../../../public', './uploads');
+		const uploadDir = path.join(__dirname, '../../../', './uploads');
 		//if the folder still don't exist create it
 		if (!fs.existsSync(uploadDir)) {
 			fs.mkdirSync(uploadDir);
@@ -51,7 +51,7 @@ function convertToPDF(doc: Conversion.IConversionSetDocument): void {
 		// create and store the html file on the public folder
 
 		//set the upload dir as /public/uploads
-		const uploadDir = path.join(__dirname, '../../../public', './uploads');
+		const uploadDir = path.join(__dirname, '../../../', './uploads');
 		const targetPath = path.join(uploadDir, doc._id.toString() + '.pdf');
 		//if the folder still don't exist create it
 		if (!fs.existsSync(uploadDir)) {
