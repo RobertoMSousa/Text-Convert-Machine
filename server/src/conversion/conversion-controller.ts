@@ -7,6 +7,7 @@ import render = require('render-quill');
 import path = require('path');
 import fs = require('fs');
 import pdf = require('html-pdf');
+import RedisQueue = require("simple-redis-queue");
 
 
 
