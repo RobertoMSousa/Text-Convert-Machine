@@ -6,45 +6,19 @@ interface IHomeControllerScope extends ng.IScope {
 
 class AppHomeViewController {
 
-	private listFiles: Array<any> = [{
-		name: 'name',
-		created: 'DD/MM/YYYY HH:MM:SS',
-		type: 'type',
-		processed: false
-	},
-		{
-			name: 'name1',
-			created: 'DD/MM/YYYY HH:MM:SS',
-			type: 'type',
-			processed: true
-		},
-		{
-			name: 'name2',
-			created: 'DD/MM/YYYY HH:MM:SS',
-			type: 'type',
-			processed: true
-		},
-		{
-			name: 'name3',
-			created: 'DD/MM/YYYY HH:MM:SS',
-			type: 'type',
-			processed: true
-		},
-		{
-			name: 'name4',
-			created: 'DD/MM/YYYY HH:MM:SS',
-			type: 'type',
-			processed: false
-		},
-		{
-			name: 'name5',
-			created: 'DD/MM/YYYY HH:MM:SS',
-			type: 'type',
-			processed: false
-		}];
+	private listFiles: Array<any> = [];
 	constructor(
 		private $scope: IHomeControllerScope,
-		private $state: angular.ui.IStateService) {
+		private $state: angular.ui.IStateService,
+		private ConversionResource: IConversionResource) {
+		this.getFilesFromServer();
+	}
+
+	private getFilesFromServer() {
+		this.ConversionResource.getFiles((files: any) => {
+			console.log('files-->', files);//roberto
+			this.listFiles = files.files;
+		});
 	}
 
 	private goToCreate() {
@@ -57,5 +31,6 @@ angular.module('AppPlatform.views.home')
 	.controller('AppHomeViewController', [
 		'$scope',
 		'$state',
+		'ConversionResource',
 		AController(AppHomeViewController)
 	]);
