@@ -7,9 +7,10 @@ import render = require('render-quill');
 import path = require('path');
 import fs = require('fs');
 import pdf = require('html-pdf');
-import RedisQueue = require("simple-redis-queue");
+import kue = require('kue');
 
 
+const queue = kue.createQueue();
 
 //function that convert the rich text to a html file
 function convertToHTML(doc: Conversion.IConversionSetDocument): void {
@@ -92,17 +93,31 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		}
 		// add the file to the store convertion queue
 		if (document.type === 'HTML') {
-			setTimeout(function() {
-				convertToHTML(document);
-			}, 10000);
+			queue.create('html', document).priority('high').save();
+			// setTimeout(function() {
+			// 	convertToHTML(document);
+			// }, 10000);
 		}
 		else {
 			if (document.type === 'PDF') {
-				setTimeout(function() {
-					convertToPDF(document);
-				}, 100000);
+				queue.create('pdf', document).priority('normal').save();
+				// setTimeout(function() {
+				// 	convertToPDF(document);
+				// }, 100000);
 			}
 		}
+		queue.process('html', function(job, done){
+			console.log('html process-->', job);//roberto
+			// setTimeout(function() {
+			// 	convertToHTML(job.data);
+			// }, 10000);
+		});
+
+		queue.process('pdf', function(job, done){
+			setTimeout(function() {
+		  	  convertToPDF(job.data);
+		    }, 100000);
+		});
 		res.sendStatus(200);
 	});
 }
