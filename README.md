@@ -7,8 +7,12 @@ The file that were previously generated are also available to download on the ho
 Roberto Sousa
 linkedin:
 
-## Installing
+##Requirements
+To run this project you need to have installed the following components on your machine:
+* Node.js (https://nodejs.org/en/)
+* MongoDB (https://www.mongodb.com/)
 
+## Installing
 
 Go to root folder of the project
 ```shell
