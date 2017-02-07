@@ -3,17 +3,30 @@ import express = require('express');
 import mongosome = require('../mongosome');
 import apiError = require('../api-helper/api-error');
 import Conversion = require('./conversion');
-import render = require('render-quill');
 import path = require('path');
 import fs = require('fs');
-import pdf = require('html-pdf');
 import kue = require('kue');
 
-
+const render = require('render-quill');
+const pdf = require('html-pdf');
 const queue = kue.createQueue();
 
+queue.process('html', 1000, function(job, done) {
+	setTimeout(function() {
+		convertToHTML(job.data);
+		done();
+	}, 100);
+});
+
+queue.process('pdf', undefined, function(job, done) {
+	setTimeout(function() {
+		convertToPDF(job.data);
+		done();
+	}, 100000);
+});
+
 //function that convert the rich text to a html file
-function convertToHTML(doc: Conversion.IConversionSetDocument): void {
+function convertToHTML(doc: any): void {
 	//convert the quill delta to html
 	render(doc.delta, (err, output) => {
 		// create and store the html file on the public folder
@@ -35,11 +48,15 @@ function convertToHTML(doc: Conversion.IConversionSetDocument): void {
 		//once stream open write the content on the file
 		stream.once('open', () => {
 			stream.write(output);
-			//update file status on the db
+
+			//update file status on the db and write down the file url
+			const query: Object = { _id: mongosome.objectIDfromHexString(doc._id) };
 			const update: Object = {
-				'$set': { status: 'complete' }
+				'$set': {
+					'status': 'complete', 'url': '../uploads/' + doc._id.toString() + '.html'
+				}
 			};
-			Conversion.collection.findOneAndUpdate({ _id: doc._id }, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
 		});
 		return;
 	});
@@ -47,7 +64,7 @@ function convertToHTML(doc: Conversion.IConversionSetDocument): void {
 
 
 //function that convert the rich text to a pdf file
-function convertToPDF(doc: Conversion.IConversionSetDocument): void {
+function convertToPDF(doc: any): void {
 	//convert the quill delta to html
 	render(doc.delta, (err, output) => {
 		// create and store the html file on the public folder
@@ -64,10 +81,11 @@ function convertToPDF(doc: Conversion.IConversionSetDocument): void {
 				return console.log(err);
 			}
 			//update the file status on the DB
+			const query: Object = { _id: mongosome.objectIDfromHexString(doc._id) };
 			const update: Object = {
-				'$set': { status: 'complete' }
+				'$set': { 'status': 'complete', 'url': targetPath }
 			};
-			Conversion.collection.findOneAndUpdate({ _id: doc._id }, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
 		});
 		return;
 	});
@@ -94,30 +112,12 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		// add the file to the store convertion queue
 		if (document.type === 'HTML') {
 			queue.create('html', document).priority('high').save();
-			// setTimeout(function() {
-			// 	convertToHTML(document);
-			// }, 10000);
 		}
 		else {
 			if (document.type === 'PDF') {
 				queue.create('pdf', document).priority('normal').save();
-				// setTimeout(function() {
-				// 	convertToPDF(document);
-				// }, 100000);
 			}
 		}
-		queue.process('html', function(job, done){
-			console.log('html process-->', job);//roberto
-			// setTimeout(function() {
-			// 	convertToHTML(job.data);
-			// }, 10000);
-		});
-
-		queue.process('pdf', function(job, done){
-			setTimeout(function() {
-		  	  convertToPDF(job.data);
-		    }, 100000);
-		});
 		res.sendStatus(200);
 	});
 }
@@ -129,7 +129,6 @@ export function getFiles(req: express.Request, res: express.Response): void {
 		if (err) {
 			return apiError.DatabaseError.sendError(res, err);
 		}
-		console.log('files-->', files);//roberto
 		res.json({ files: files }); //create object on the fly if does not exists
 		return;
 	});
