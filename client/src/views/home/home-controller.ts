@@ -25,6 +25,12 @@ class AppHomeViewController {
 		this.$state.go('create');
 	}
 
+	private downloadfile(doc) {
+		console.log('doc-->', doc);//roberto
+		this.ConversionResource.downloadFile({ id: doc._id, type: doc.type }, (err: any) => {
+		});
+	}
+
 }
 
 angular.module('AppPlatform.views.home')
