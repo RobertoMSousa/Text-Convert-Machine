@@ -16,19 +16,12 @@ class AppHomeViewController {
 
 	private getFilesFromServer() {
 		this.ConversionResource.getFiles((files: any) => {
-			console.log('files-->', files);//roberto
 			this.listFiles = files.files;
 		});
 	}
 
 	private goToCreate() {
 		this.$state.go('create');
-	}
-
-	private downloadfile(doc) {
-		console.log('doc-->', doc);//roberto
-		this.ConversionResource.downloadFile({ id: doc._id, type: doc.type }, (err: any) => {
-		});
 	}
 
 }
