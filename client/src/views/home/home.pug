@@ -30,6 +30,9 @@ div.home-main-container
 					loading-animation.center(ng-if='file.status === "progress"')
 					check-animation.center(ng-if='file.status === "complete"')
 			div.col-sm-2
-				a.btn.btn-primary.btn-success.center( href="/api/conversion/{{file.type}}/{{file._id}}/download" target="" ng-class="{'home-disable-download-btn': file.status === 'progress'}")
+				a.btn.btn-primary.btn-success.center( ng-if="file.status === 'complete'" href="/api/conversion/{{file.type}}/{{file._id}}/download" target="")
+					span.glyphicon.glyphicon-download-alt
+					|  Download
+				a.btn.btn-primary.btn-success.center.home-disable-download-btn( ng-if="file.status === 'progress'" href="" target="")
 					span.glyphicon.glyphicon-download-alt
 					|  Download
