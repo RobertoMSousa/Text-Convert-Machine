@@ -133,3 +133,20 @@ export function getFiles(req: express.Request, res: express.Response): void {
 		return;
 	});
 }
+
+
+//download the file based on the id
+export function downloadFile(req: express.Request, res: express.Response): void {
+	console.log('req.parms-->', req.params);//roberto
+	// const filePath = path.join(__dirname, '../../../public/', './uploads/');
+	const fileName = req.params.id + '.' + req.params.type.toLowerCase();
+	console.log('filename-->', fileName);//roberto
+	res.download('./uploads/' + fileName, 'sample.html', function(err) {
+		if (err) {
+			console.log('err:', err);//roberto
+		} else {
+			console.log('it will download');//roberto
+		}
+	});
+	return;
+}
