@@ -25,7 +25,9 @@ var gulp = require('gulp'),
 	argv = require('yargs').argv,
 	babel = require('gulp-babel')
 	webpack = require('webpack-stream'),
-	merge = require('merge2');
+	merge = require('merge2'),
+	mocha = require('gulp-mocha'),
+	mongodb = require('mongodb');
 
 var serverProject = ts.createProject({
 	declarationFiles: true,
@@ -34,7 +36,9 @@ var serverProject = ts.createProject({
 	module: 'commonjs',
 	typescript: TypeScript,
 	types: [
-		'node'
+		'node',
+		"mocha",
+		"chai"
 	]
 });
 
@@ -278,10 +282,48 @@ gulp.task('distclean', function() {
 		'./server/lib',
 		'./server/typings',
 		'./bower_components',
-		'./public'
+		'./public',
+		'./reports'
 	], {read:false})
 	.pipe(vinylPaths(del))
 	;
+});
+
+// gulp task responsible to do the test on the server side
+gulp.task('test:server', ['compile:server'], function(cb) {
+	if (isErr()) {
+		console.log('Error, skipping test:server');
+		return cb();
+	}
+
+	process.env.TESTING = true;
+
+	gulp.src([
+		'server/lib/**/!(*_test).js'
+	])
+	.pipe(istanbul())
+	.pipe(istanbul.hookRequire())
+	.on('finish', function() {
+		gulp.src(
+			['server/lib/**/*_test.js'], { read: false }
+		)
+		.pipe(plumber())
+		.pipe(mocha({
+			reporter: 'spec',
+			timeout: 5000
+		}))
+		.pipe(istanbul.writeReports({
+			dir: 'reports/coverage-server',
+			reporters: [ 'html', 'text-summary' ]
+		}))
+		.once('end', function() {
+			// only exit if TTY, so we don't exit when running in WebStorm (where exit truncates the output)
+			if (require('tty').isatty(1)) {
+				process.exit();
+			}
+			cb();
+		});
+	});
 });
 
 gulp.task('default', ['compile']);

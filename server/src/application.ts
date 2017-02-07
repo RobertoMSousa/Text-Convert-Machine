@@ -3,6 +3,9 @@ require('source-map-support').install();
 import express = require('express');
 import path = require('path');
 import bodyParser = require('body-parser');
+
+
+import config = require('./config');
 import converionRoutes = require('./conversion/conversion-routes');
 
 var publicDir = path.join(__dirname, '/../../public/');
