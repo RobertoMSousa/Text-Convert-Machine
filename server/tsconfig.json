@@ -8,7 +8,10 @@
 			"body-parser"
 			"mongodb",
 			"async",
-			"nconf"
+			"nconf",
+			"redis",
+			"kue",
+			"quill"
 		]
 	},
 	"exclude": [
