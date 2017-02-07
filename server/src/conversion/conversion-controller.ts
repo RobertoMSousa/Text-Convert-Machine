@@ -113,10 +113,12 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		}
 		// add the file to the store convertion queue
 		if (document.type === 'HTML') {
+			// add the html files to the queue with hight priority
 			queue.create('html', document).priority('high').save();
 		}
 		else {
 			if (document.type === 'PDF') {
+				// add the html files to the queue with normal priority
 				queue.create('pdf', document).priority('normal').save();
 			}
 		}
@@ -138,17 +140,8 @@ export function getFiles(req: express.Request, res: express.Response): void {
 
 
 //download the file based on the id
-export function downloadFile(req: express.Request, res: express.Response): void {
-	console.log('req.parms-->', req.params);//roberto
-	// const filePath = path.join(__dirname, '../../../public/', './uploads/');
+export function downloadFile(req: express.Request, res: express.Response, next: any): void {
 	const fileName = req.params.id + '.' + req.params.type.toLowerCase();
-	console.log('filename-->', fileName);//roberto
-	res.download('./uploads/' + fileName, 'sample.html', function(err) {
-		if (err) {
-			console.log('err:', err);//roberto
-		} else {
-			console.log('it will download');//roberto
-		}
-	});
+	res.download('./uploads/' + fileName,  fileName);
 	return;
 }
