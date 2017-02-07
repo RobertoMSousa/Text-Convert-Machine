@@ -11,19 +11,20 @@ const render = require('render-quill');
 const pdf = require('html-pdf');
 const queue = kue.createQueue();
 
+// process the html queue
 queue.process('html', 1000, function(job, done) {
 	setTimeout(function() {
 		convertToHTML(job.data);
 		done();
-	}, 100); //10000
+	}, 10000); //10000
 });
 
+// process the pdf queue
 queue.process('pdf', 1000, function(job, done) {
-	console.log('convert pdf');//roberto
 	setTimeout(function() {
 		convertToPDF(job.data);
 		done();
-	}, 100); // 100000
+	}, 10000); // 10000
 });
 
 //function that convert the rich text to a html file
