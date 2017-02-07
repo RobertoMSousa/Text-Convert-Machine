@@ -11,6 +11,9 @@ export module Routes {
 			.put(ConversionController.conversionFunc)
 			.get(ConversionController.getFiles);
 
+		router.route('/:type/:id/download')
+			.get(ConversionController.downloadFile);
+
 		return router;
 	}
 }
