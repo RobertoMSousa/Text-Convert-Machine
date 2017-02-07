@@ -15,14 +15,15 @@ queue.process('html', 1000, function(job, done) {
 	setTimeout(function() {
 		convertToHTML(job.data);
 		done();
-	}, 100);
+	}, 100); //10000
 });
 
-queue.process('pdf', undefined, function(job, done) {
+queue.process('pdf', 1000, function(job, done) {
+	console.log('convert pdf');//roberto
 	setTimeout(function() {
 		convertToPDF(job.data);
 		done();
-	}, 100000);
+	}, 100); // 100000
 });
 
 //function that convert the rich text to a html file
