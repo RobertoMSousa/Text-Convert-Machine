@@ -15,24 +15,14 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
+	"include": [
+        "src/**/*"
+    ],
     "exclude": [
         "node_modules",
         "typings/browser",
         "typings/browser.d.ts"
     ],
-	"types": [
-		"node",
-		"express",
-		"body-parser",
-		"mongodb",
-		"async",
-		"nconf",
-		"redis",
-		"kue",
-		"quill",
-		"mocha",
-		"chai"
-	],
     "compileOnSave": false,
     "buildOnSave": false,
     "atom": {
