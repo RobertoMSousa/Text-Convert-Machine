@@ -1,5 +1,3 @@
-/// <reference path="../../../node_modules/@types/mocha/index.d.ts" />
-
 
 import chai = require('chai');
 import app = require('../application');
