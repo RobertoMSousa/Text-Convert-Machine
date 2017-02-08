@@ -34,12 +34,7 @@ var serverProject = ts.createProject({
 	noResolve: false,
 	target: 'ES6',
 	module: 'commonjs',
-	typescript: TypeScript,
-	types: [
-		'node',
-		"mocha",
-		"chai"
-	]
+	typescript: TypeScript
 });
 
 var tsLintConfigured = function() {
@@ -127,6 +122,46 @@ var compileServer = function() {
 		tsresults.js.pipe(sourcemaps.write()).pipe(gulp.dest('server/lib'))
 	]);
 }
+
+
+// gulp task responsible to do the test on the server side
+gulp.task('test:server', ['compile:server'], function(cb) {
+	if (isErr()) {
+		console.log('Error, skipping test:server');
+		return cb();
+	}
+
+	// process.env.TESTING = true;
+
+	gulp.src([
+		'server/lib/**/!(*_test).js'
+	])
+	.pipe(istanbul({includeUntested: true}))
+	.pipe(istanbul.hookRequire())
+	.on('finish', function() {
+		gulp.src(
+			['server/lib/**/*_test.js'], { read: false }
+		)
+		.pipe(plumber())
+		.pipe(mocha({
+			reporter: 'spec',
+			timeout: 5000
+		}))
+		.pipe(istanbul.writeReports( {
+			dir: 'reports/coverage-server',
+			reporters: [ 'html' ],
+			// reporters: [ 'lcov', 'json', 'text', 'text-summary' ],
+			reportOpts: { dir: './reports/coverage-server' },
+		}))
+		.once('end', function() {
+			// only exit if TTY, so we don't exit when running in WebStorm (where exit truncates the output)
+			if (require('tty').isatty(1)) {
+				process.exit();
+			}
+			cb();
+		});
+	});
+});
 
 gulp.task('reset_error', function() {
 	resetErr();
@@ -289,41 +324,5 @@ gulp.task('distclean', function() {
 	;
 });
 
-// gulp task responsible to do the test on the server side
-gulp.task('test:server', ['compile:server'], function(cb) {
-	if (isErr()) {
-		console.log('Error, skipping test:server');
-		return cb();
-	}
-
-	process.env.TESTING = true;
-
-	gulp.src([
-		'server/lib/**/!(*_test).js'
-	])
-	.pipe(istanbul())
-	.pipe(istanbul.hookRequire())
-	.on('finish', function() {
-		gulp.src(
-			['server/lib/**/*_test.js'], { read: false }
-		)
-		.pipe(plumber())
-		.pipe(mocha({
-			reporter: 'spec',
-			timeout: 5000
-		}))
-		.pipe(istanbul.writeReports({
-			dir: 'reports/coverage-server',
-			reporters: [ 'html', 'text-summary' ]
-		}))
-		.once('end', function() {
-			// only exit if TTY, so we don't exit when running in WebStorm (where exit truncates the output)
-			if (require('tty').isatty(1)) {
-				process.exit();
-			}
-			cb();
-		});
-	});
-});
 
 gulp.task('default', ['compile']);
