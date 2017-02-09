@@ -7,7 +7,7 @@ The file that were previously generated are also available to download on the ho
 Roberto Sousa
 linkedin:
 
-##Requirements
+## Requirements
 To run this project you need to have installed the following components on your machine:
 * Node.js (https://nodejs.org/en/)
 * MongoDB (https://www.mongodb.com/)
@@ -37,6 +37,16 @@ gulp develop
 This will launch the development environment on localhost:8000 for development purposes.
 
 After this point you should go to localhost:8000 to see the platform running.
+
+
+## Testing
+To run the server tests run the following command
+```shell
+gulp  test:server
+```
+
+Note that the mocha has a timeout of 5000ms. Due to the timeout used to simulate a queue those tests will fail.
+Please reduce the timeout on the conversion-controller.ts to make those tests work.
 
 ## Features
 
