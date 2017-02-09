@@ -115,14 +115,18 @@ export function conversionFunc(req: express.Request, res: express.Response): voi
 		if (document.type === 'HTML') {
 			// add the html files to the queue with hight priority
 			queue.create('html', document).priority('high').save();
+			res.sendStatus(200);
 		}
 		else {
 			if (document.type === 'PDF') {
 				// add the html files to the queue with normal priority
 				queue.create('pdf', document).priority('normal').save();
+				res.sendStatus(200);
+			}
+			else {
+				res.sendStatus(403);
 			}
 		}
-		res.sendStatus(200);
 	});
 }
 
