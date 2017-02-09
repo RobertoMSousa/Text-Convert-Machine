@@ -152,7 +152,6 @@ export interface ICursor<T> {
     skip(skip: number): ICursor<T>;
 	snapshot(snapshot: boolean): ICursor<T>;
 	sort(keyOrList: any /* string|Array|Object */, direction?: number): ICursor<T>;
-    stream(options?: IStreamOptions<T>): mongodb.Cursor;
 
     toArray(callback: (err: Error, results: T[]) => any): void;
 
