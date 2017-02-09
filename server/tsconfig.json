@@ -15,9 +15,6 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
-	"include": [
-        "src/**/*"
-    ],
     "exclude": [
         "node_modules",
         "typings/browser",
