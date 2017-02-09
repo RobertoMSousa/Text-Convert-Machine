@@ -16,7 +16,7 @@ queue.process('html', 1000, function(job, done) {
 	setTimeout(function() {
 		convertToHTML(job.data);
 		done();
-	}, 10000); //10000
+	}, 10000); //10000 miliseconds
 });
 
 // process the pdf queue
@@ -24,7 +24,7 @@ queue.process('pdf', 1000, function(job, done) {
 	setTimeout(function() {
 		convertToPDF(job.data);
 		done();
-	}, 10000); // 10000
+	}, 100000); // 100000 miliseconds
 });
 
 //function that convert the rich text to a html file
