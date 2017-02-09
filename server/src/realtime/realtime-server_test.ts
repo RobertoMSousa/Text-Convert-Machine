@@ -4,7 +4,6 @@ import mocha = require('mocha');
 import db = require('../main-db');
 const expect = chai.expect;
 
-
 describe('Realtime server', function() {
 
 	//before start clean up the DB
