@@ -96,6 +96,9 @@ function convertToPDF(doc: any): void {
 
 // function responsible to create and store the document that will be converted
 export function conversionFunc(req: express.Request, res: express.Response): void {
+	if (!req.body.type || !req.body.title || !req.body.delta) {
+		res.sendStatus(400);
+	}
 	// build the document and store on the DB
 	const document: Conversion.IConversionSetDocument = {
 		documentId: new mongosome.ObjectID(),
