@@ -84,27 +84,16 @@ export function objectIDfromHexString(hexString: string): ObjectID {
 	}
 }
 
-/** {max} We assume any document has an optional _id,
- * This is required to help with improved type-safety.
- * Derive all your document interfaces from this.
- */
 export interface IDocument {
 	_id?: ObjectID;
 }
 
-/** {max} I was not able to find official documentation on
- * this, however it is quite useful and appears to work fine
- * for 2.7 (and, trusting some questions on the internet, for 3.0 as well).
- */
+
 export interface ILastError {
 	updatedExisting: boolean; ///< relevant for upsert
 	n: number; ///< number affected
 	ok: boolean; ///< did the operation succeed?
 	err?: any; ///< last error, not necessarily returned
-}
-
-export interface IPromise<T> {
-	//// {max} i fill this in eventually
 }
 
 export interface IStreamOptions<T> {
@@ -121,8 +110,6 @@ export interface ICursorCountOptions {
 
 /* Copied from mongodb.d.ts, but using generic to enforce Type Safety */
 export interface ICursor<T> {
-	/// Mostly up-to-date {{max}} at of 2015-11-23
-	/// (couple of methods missing which we never use)
 	/// http://mongodb.github.io/node-mongodb-native/2.0/api/Cursor.html
     batchSize(batchSize: number): ICursor<T>;
 
@@ -136,7 +123,6 @@ export interface ICursor<T> {
 	filter(filter: Object): ICursor<T>;
 	forEach(iterator: (doc: T) => void, endCallback: (error: Error) => void): void;
 
-	hasNext(callback: (error: Error, result: boolean) => void): IPromise<T>;
 	hint(hint: Object): ICursor<T>;
 
     isClosed(): boolean;
@@ -165,7 +151,6 @@ export interface ICommandCursor<T> {
 }
 
 
-/// {max} This is not documented. XXX UPDATE: NOW, it is documented ... will fix
 export interface IInsertResult<T> {
 	result: {
 		ok: number;
@@ -187,13 +172,11 @@ export interface IInsertOneResult<T> {
 	};
 };
 
-/// {max} new
 export interface IUpsertEntry {
 	index: number;
 	_id: ObjectID;
 };
 
-/// {max} new
 /// http://mongodb.github.io/node-mongodb-native/2.0/api/Collection.html#~updateWriteOpResult
 export interface IUpdateResult {
 	result: {
@@ -210,7 +193,7 @@ export interface IUpdateResult {
 	};
 };
 
-///{max}
+
 export interface IUpdateOptions {
 	upsert?: boolean; ///< Update operation is an upsert. Default: false
 	w?: number | string; ///< write concern. Default: null
@@ -219,12 +202,12 @@ export interface IUpdateOptions {
 	bypassDocumentValidation?: boolean; ///< Allow driver to bypass schema validation in MongoDB 3.2 or higher
 };
 
-///{max}
+
 export interface IMongoDBPromise {
 	/// undefined for now..
 };
 
-///{max}
+
 export interface IDeleteResult {
 	result: {
 		ok: number; ///< 1 iff command executed correctly
@@ -234,7 +217,7 @@ export interface IDeleteResult {
 	deletedCount: number; ///< The number of documents deleted
 };
 
-///{max}
+
 export interface IDeleteOptions {
 	w?: number | string; ///< write concern
 	wtimeout?: number;
