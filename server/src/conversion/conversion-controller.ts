@@ -7,9 +7,12 @@ import path = require('path');
 import fs = require('fs');
 import kue = require('kue');
 
+const app = require('../application');
+
 const render = require('render-quill');
 const pdf = require('html-pdf');
 const queue = kue.createQueue();
+
 
 // process the html queue
 queue.process('html', 1000, function(job, done) {
@@ -58,7 +61,11 @@ function convertToHTML(doc: any): void {
 					'status': 'complete', 'url': '../uploads/' + doc._id.toString() + '.html'
 				}
 			};
-			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => {
+				if (err) {
+					return;
+				}
+			});
 		});
 		return;
 	});
@@ -87,7 +94,11 @@ function convertToPDF(doc: any): void {
 			const update: Object = {
 				'$set': { 'status': 'complete', 'url': targetPath }
 			};
-			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => {
+				if (err) {
+					return;
+				}
+			});
 		});
 		return;
 	});

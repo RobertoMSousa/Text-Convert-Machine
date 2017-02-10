@@ -91,7 +91,6 @@ describe.only('conversion API', function() {
 						done(err);
 						return;
 					}
-					console.log('res-->', res.body);//roberto
 					chai.expect(res.body.files.length).to.be.equal(1);
 					chai.expect(res.body.files[0].type).to.be.equal('PDF');
 					chai.expect(res.body.files[0].type).to.be.equal('sample');
@@ -124,7 +123,6 @@ describe.only('conversion API', function() {
 						done(err);
 						return;
 					}
-					console.log('res-->', res.body);//roberto
 					chai.expect(res.body.files.length).to.be.equal(1);
 					chai.expect(res.body.files[0].type).to.be.equal('HTML');
 					chai.expect(res.body.files[0].type).to.be.equal('sample');
