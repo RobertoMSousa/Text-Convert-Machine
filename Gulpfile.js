@@ -337,6 +337,10 @@ gulp.task('realtime:start', ['compile:server'], function() {
 	});
 });
 
+gulp.task('realtime:restart', ['compile:server'], function() {
+	server.restart();
+});
+
 gulp.task('develop:realtime', ['realtime:start'], function(){
 	gulp.watch('server/src/**/*.ts', ['realtime:restart']);
 });
