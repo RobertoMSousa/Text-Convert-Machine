@@ -6,6 +6,7 @@ const redisAdapter = require('socket.io-redis');
 import mongosome = require('../mongosome');
 import redis = require('redis');
 import SocketIO = require('socket.io');
+import SocketIOClient = require('socket.io-client');
 import Conversion = require('./namespaces/conversion/conversion-controller');
 
 export function main(callback) {
@@ -34,11 +35,6 @@ export function main(callback) {
 		console.error(err);
 	});
 	io.adapter(adapter);
-
-	/// Session Middleware
-	io.use((socket, next) => {
-		return next();
-	}).on("connection", (socket) => { });
 
 
 	// Declare controllers responsible to handle each namespace
