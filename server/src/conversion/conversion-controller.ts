@@ -13,6 +13,7 @@ const render = require('render-quill');
 const pdf = require('html-pdf');
 const queue = kue.createQueue();
 
+import socketServer = require('../socket');
 
 // process the html queue
 queue.process('html', 1000, function(job, done) {
@@ -65,6 +66,7 @@ function convertToHTML(doc: any): void {
 				if (err) {
 					return;
 				}
+				socketServer.socket.emit('conversion:done', doc);
 			});
 		});
 		return;
@@ -98,6 +100,7 @@ function convertToPDF(doc: any): void {
 				if (err) {
 					return;
 				}
+				socketServer.socket.emit('conversion:done', doc);
 			});
 		});
 		return;
@@ -160,6 +163,6 @@ export function getFiles(req: express.Request, res: express.Response): void {
 //download the file based on the id
 export function downloadFile(req: express.Request, res: express.Response, next: any): void {
 	const fileName = req.params.id + '.' + req.params.type.toLowerCase();
-	res.download('./uploads/' + fileName,  fileName);
+	res.download('./uploads/' + fileName, fileName);
 	return;
 }
