@@ -56,7 +56,7 @@ class AppHomeViewController {
 
 	private getFilesFromServer() {
 		this.ConversionResource.getFiles((files: any) => {
-			this.listFiles = files.files;
+			this.listFiles = files.files.reverse();
 		});
 	}
 
