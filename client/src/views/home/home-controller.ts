@@ -7,6 +7,19 @@ interface IHomeControllerScope extends ng.IScope {
 interface IConversionSocketEvent {
 }
 
+// interface of the file
+interface IFile {
+	_id: string;
+	created: string;
+	delta: any;
+	documentId: string;
+	status: string;
+	title: string;
+	type: string;
+	url: string;
+	version: number;
+}
+
 class AppHomeViewController {
 
 	private listFiles: Array<any> = [];
