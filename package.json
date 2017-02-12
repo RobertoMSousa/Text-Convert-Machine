@@ -8,7 +8,7 @@
     "client-single-test": "./node_modules/karma/bin/karma start karma.conf.js --single-run"
   },
   "dependencies": {
-    "@types/mocha": "^2.2.39",
+    "@types/socket.io-client": "^1.4.29",
     "angular-ui-bootstrap": "^2.5.0",
     "async": "^2.1.4",
     "babel-loader": "^6.2.10",
@@ -49,8 +49,12 @@
     "path": "^0.12.7",
     "pug": "^2.0.0-beta11",
     "pug-loader": "^2.3.0",
+    "redis": "^2.6.5",
     "render-quill": "^1.0.5",
     "run-sequence": "^1.2.2",
+    "socket.io": "^1.7.2",
+    "socket.io-client": "^1.7.2",
+    "socket.io-redis": "^3.1.0",
     "supertest": "^3.0.0",
     "ts-loader": "^2.0.0",
     "tslint": "^4.4.2",
@@ -59,8 +63,11 @@
     "webpack-stream": "^3.2.0"
   },
   "devDependencies": {
-    "@types/istanbul": "^0.4.29",
     "@types/mocha": "^2.2.39",
+    "@types/supertest": "^2.0.0",
+    "@types/socket.io": "^1.4.27",
+    "@types/socket.io-redis": "^1.0.21",
+    "@types/istanbul": "^0.4.29",
     "@types/chai": "^3.4.34",
     "@types/kue": "^0.9.31",
     "@types/mongodb": "^2.1.37",

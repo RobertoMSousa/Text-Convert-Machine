@@ -5,6 +5,7 @@ import './app';
 import './app-controller';
 //services
 import './services/conversion/conversion-resource';
+import './services/realtime/realtime';
 //views
 import './views/home/_home';
 import './views/home/home-controller';

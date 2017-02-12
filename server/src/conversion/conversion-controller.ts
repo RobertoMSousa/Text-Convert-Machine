@@ -7,9 +7,13 @@ import path = require('path');
 import fs = require('fs');
 import kue = require('kue');
 
+const app = require('../application');
+
 const render = require('render-quill');
 const pdf = require('html-pdf');
 const queue = kue.createQueue();
+
+import socketServer = require('../socket');
 
 // process the html queue
 queue.process('html', 1000, function(job, done) {
@@ -58,7 +62,12 @@ function convertToHTML(doc: any): void {
 					'status': 'complete', 'url': '../uploads/' + doc._id.toString() + '.html'
 				}
 			};
-			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, { returnOriginal: false }, (err: Error, result: any) => {
+				if (err) {
+					return;
+				}
+				socketServer.socket.emit('conversion:done', result.value);
+			});
 		});
 		return;
 	});
@@ -87,7 +96,12 @@ function convertToPDF(doc: any): void {
 			const update: Object = {
 				'$set': { 'status': 'complete', 'url': targetPath }
 			};
-			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => { });
+			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => {
+				if (err) {
+					return;
+				}
+				socketServer.socket.emit('conversion:done', doc);
+			});
 		});
 		return;
 	});
@@ -149,6 +163,6 @@ export function getFiles(req: express.Request, res: express.Response): void {
 //download the file based on the id
 export function downloadFile(req: express.Request, res: express.Response, next: any): void {
 	const fileName = req.params.id + '.' + req.params.type.toLowerCase();
-	res.download('./uploads/' + fileName,  fileName);
+	res.download('./uploads/' + fileName, fileName);
 	return;
 }

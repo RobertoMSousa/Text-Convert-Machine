@@ -16,6 +16,7 @@ angular.module('AppPlatform', [
 	'AppPlatform.views.create',
 	// services
 	'AppPlatform.services.conversion',
+	'AppPlatform.services.realtimeSocket',
 	// widgets
 	'AppPlatform.widgets.loadingAnimation',
 	'AppPlatform.widgets.checkAnimation'

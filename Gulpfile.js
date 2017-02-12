@@ -324,5 +324,25 @@ gulp.task('distclean', function() {
 	;
 });
 
+gulp.task('realtime:start', ['compile:server'], function() {
+	var port = 3000;
+	if (argv.secondary) port = port + 1;
+	if (argv.port) port = argv.port;
+
+	server.listen({
+		path: 'server/lib/realtime/realtime-server.js',
+		env: {
+			PORT: port
+		}
+	});
+});
+
+gulp.task('realtime:restart', ['compile:server'], function() {
+	server.restart();
+});
+
+gulp.task('develop:realtime', ['realtime:start'], function(){
+	gulp.watch('server/src/**/*.ts', ['realtime:restart']);
+});
 
 gulp.task('default', ['compile']);

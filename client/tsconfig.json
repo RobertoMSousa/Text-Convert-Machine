@@ -1,23 +1,37 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"sourceMap": true,
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "noImplicitAny": false,
+        "noImplicitUseStrict": false,
+        "removeComments": true,
+        "noLib": false,
+        "preserveConstEnums": true,
+        "suppressImplicitAnyIndexErrors": true,
 		"types": [
 			"node",
 			"angular",
+			"angular-resource",
 			"angular-ui-router",
 			"quill",
-			"angular-resource"
+			"socket.io-client",
+			"socket.io"
 		]
-	},
-	"exclude": [
-		"node_modules",
-		"typings/browser",
-		"typings/browser.d.ts"
-	],
-	"compileOnSave": false,
-	"buildOnSave": false,
-	"atom": {
-		"rewriteTsconfig": false
-	}
+    },
+    "exclude": [
+        "node_modules",
+        "typings/browser",
+        "typings/browser.d.ts"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "atom": {
+        "rewriteTsconfig": false
+    }
 }
