@@ -62,11 +62,11 @@ function convertToHTML(doc: any): void {
 					'status': 'complete', 'url': '../uploads/' + doc._id.toString() + '.html'
 				}
 			};
-			Conversion.collection.findOneAndUpdate(query, update, {}, (err: Error, result: any) => {
+			Conversion.collection.findOneAndUpdate(query, update, { returnOriginal: false }, (err: Error, result: any) => {
 				if (err) {
 					return;
 				}
-				socketServer.socket.emit('conversion:done', doc);
+				socketServer.socket.emit('conversion:done', result.value);
 			});
 		});
 		return;
