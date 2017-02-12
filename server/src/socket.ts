@@ -36,10 +36,7 @@ io.adapter(adapter);
 
 io.of('/conversion')
 	.on('connection', (skt) => {
-		console.log("new socket connection sample!"); //roberto
-		// console.log('skt-->', skt);//roberto
 		socket = skt;
-		// console.log('socket-->', socket);//roberto
 		// Join a room
 		socket.join(roomName);
 

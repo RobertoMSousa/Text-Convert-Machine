@@ -39,7 +39,6 @@ class AppHomeViewController {
 		this.conversionSocket = socket.connect('conversion', {})
 			.on('conversion:done', (doc: IFile) => {
 				// on file convert load from server
-				console.log('doc-->', doc);//roberto
 				this.updateListFiles(doc);
 				$('#alert_placeholder').html('<div class="alert alert-success fade in"><a ng-click="ctrl.closeAlert()" class="close" data-dismiss="alert">&times;</a>Your file ' + doc.title + ' is available for download!</div>')
 				this.$timeout(() => {
