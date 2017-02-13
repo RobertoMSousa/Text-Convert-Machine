@@ -36,12 +36,6 @@ gulp develop
 ```
 This will launch the development environment on localhost:8000 for development purposes.
 
-To run the real time server on run the following command on a different terminal.
-```shell
-gulp develop:realtime
-```
-This will run a realtime server with socket.io for realtime communications.
-
 After this point you should go to localhost:8000 to see the platform running.
 
 
