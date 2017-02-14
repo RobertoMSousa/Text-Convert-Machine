@@ -1,17 +1,34 @@
 .home-main-container
-	width 60%
-	height 85%
-	margin-top 5%
-	margin-left 20%
+	height calc(100% - 20px)
 	border 2px solid #ccc
+	display inline-block
 
-.conversion-home-header
+.home-main-left-menu
+	display inline-block
+	height calc(100% - 20px)
+
+.home-main-left-menu-header-body
+	width 100%
+	height 89%
+	i
+		color light-grey
+		margin 5px
+		position: relative
+		left: 50%
+		transform: translate(-50%, -50%)
+		span
+			margin-left 10px
+			font-size 20px
+			color light-grey
+
+.conversion-home-header, .home-main-left-menu-header
 	width 100%
 	height 11%
 
 .conversion-home-header-left
 	height 100%
 	text-align center
+	padding 5px
 
 .conversion-home-header-right
 	height 100%
