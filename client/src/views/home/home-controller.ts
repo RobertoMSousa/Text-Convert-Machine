@@ -24,6 +24,7 @@ class AppHomeViewController {
 
 	private listFiles: Array<IFile> = new Array();
 	private conversionSocket: AppSocket;
+	private selectedView: string = 'all';
 
 	constructor(
 		private $scope: IHomeControllerScope,
@@ -51,6 +52,18 @@ class AppHomeViewController {
 			// Disconnect from realtime server
 			this.conversionSocket.disconnect();
 		});
+	}
+
+	private selectAllFiles() {
+		this.selectedView = 'all';
+	}
+
+	private selectRecentActivity() {
+		this.selectedView = 'recent';
+	}
+
+	private selectFolders() {
+		this.selectedView = 'folders';
 	}
 
 	private getFilesFromServer() {

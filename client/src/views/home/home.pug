@@ -3,11 +3,11 @@
 div.home-main-left-menu.col-sm-3
 	div.home-main-left-menu-header
 	div.home-main-left-menu-header-body
-		i.fa.fa-file-o.fa-2x.home-main-left-menu-header-row
+		i.fa.fa-file-o.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectAllFiles()')
 			span All Files
-		i.fa.fa-clock-o.fa-2x.home-main-left-menu-header-row
+		i.fa.fa-clock-o.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectRecentActivity()')
 			span Recent Activity
-		i.fa.fa-folder-open.fa-2x.home-main-left-menu-header-row
+		i.fa.fa-folder-open.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectFolders()')
 			span Folders
 div.home-main-container.col-sm-9
 	div.row.conversion-home-header
