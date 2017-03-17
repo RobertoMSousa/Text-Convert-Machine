@@ -8,7 +8,6 @@
     "client-single-test": "./node_modules/karma/bin/karma start karma.conf.js --single-run"
   },
   "dependencies": {
-    "@types/socket.io-client": "^1.4.29",
     "angular-ui-bootstrap": "^2.5.0",
     "async": "^2.1.4",
     "babel-loader": "^6.2.10",
@@ -81,7 +80,8 @@
     "@types/nconf": "0.0.33",
     "@types/node": "^7.0.4",
     "@types/quill": "0.0.29",
-    "babel-core": "^6.18.2"
+    "babel-core": "^6.18.2",
+	"@types/socket.io-client": "^1.4.29",
   },
   "repository": {
     "type": "git",
