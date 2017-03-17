@@ -1,6 +1,15 @@
 
 #alert_placeholder.alert-home-placeholder
-div.home-main-container
+div.home-main-left-menu.col-sm-3
+	div.home-main-left-menu-header
+	div.home-main-left-menu-header-body
+		i.fa.fa-file-o.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectAllFiles()' ng-class='{"select-left-row": ctrl.selectedView === "all"}')
+			span All Files
+		i.fa.fa-clock-o.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectRecentActivity()' ng-class='{"select-left-row": ctrl.selectedView === "recent"}')
+			span Recent Activity
+		i.fa.fa-folder-open.fa-2x.home-main-left-menu-header-row(ng-click='ctrl.selectFolders()' ng-class='{"select-left-row": ctrl.selectedView === "folders"}')
+			span Folders
+div.home-main-container.col-sm-9
 	div.row.conversion-home-header
 		div.col-sm-6.conversion-home-header-left
 			h1.conversion-home-header-title.center Convertions
@@ -21,6 +30,8 @@ div.home-main-container
 	div.row.conversion-home-content-list
 		div.display-conversion-row(ng-repeat='file in ctrl.listFiles')
 			div.col-sm-4
+				i.fa.fa-file-pdf-o.fa-2x.home-file-list-icon(ng-if='file.type === "PDF"')
+				i.fa.fa-code.fa-2x.home-file-list-icon(ng-if='file.type === "HTML"')
 				p.center(ng-bind='file.title')
 			div.col-sm-6
 				div.col-xs-6.home-conversion-display-date
